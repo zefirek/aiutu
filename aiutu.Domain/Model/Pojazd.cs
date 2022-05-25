@@ -13,7 +13,7 @@ namespace aiutu.Domain.Model
         public bool CzyJestWydawka { get; set; }
         public int WlascicielId { get; set; }
 
-        public virtual PojazdRodzaj PojazdRodzaj { get; set; }
+        public virtual PojazdRodzaj PojazdRodzaj { get; set; }  // Type
 
         public virtual Wlasciciel Wlsciciel { get; set; }
 

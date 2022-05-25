@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aiutu.Tests", "aiutu.Tests\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Dokumentacja", "_Dokumentacja", "{D888B8C6-A70F-4ACB-9282-4D6C7A96AE14}"
 	ProjectSection(SolutionItems) = preProject
-		dane.txt = dane.txt
+		_Dokumentacja\dane.txt = _Dokumentacja\dane.txt
 	EndProjectSection
 EndProject
 Global
