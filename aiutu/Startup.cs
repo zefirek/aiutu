@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using aiutu.Domain.Interfaces;
 
 namespace aiutu
 {
@@ -33,6 +34,8 @@ namespace aiutu
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<Context>();
+
+            services.AddTransient<IKontrahentRepository, KontrahentRepository>();
             services.AddControllersWithViews();
             services.AddRazorPages();
 

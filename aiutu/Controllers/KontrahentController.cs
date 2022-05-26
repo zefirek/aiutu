@@ -20,7 +20,7 @@ namespace aiutu.Web.Controllers
             // serwis musi przygotować dane
             // serwis musi zwrócić dane w odpowiednim formacie
 
-            var model = KontrahentService.GetAllKontrahenciForList();
+            var model = kontrahentService.GetAllKontrahenciForList();
             return View(model);
         }
 
@@ -51,8 +51,8 @@ namespace aiutu.Web.Controllers
 
         public IActionResult ViewKontrahent(int kontrahentId)
         {
-            var kontrahentModel = kontrahentService.GetKontrahentDeatails(kontrahentId);
-            return View(kontrahentModel);
+            var kontrahentModel = kontrahentService.GetKontrahentDetails(kontrahentId);
+            return View(); //View(kontrahentModel);
         }
 
     }

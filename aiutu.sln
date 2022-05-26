@@ -26,6 +26,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Dokumentacja", "_Dokumentacja", "{D888B8C6-A70F-4ACB-9282-4D6C7A96AE14}"
 	ProjectSection(SolutionItems) = preProject
 		_Dokumentacja\dane.txt = _Dokumentacja\dane.txt
+		_Dokumentacja\migracja_SQL.txt = _Dokumentacja\migracja_SQL.txt
 	EndProjectSection
 EndProject
 Global

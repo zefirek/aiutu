@@ -1,2 +1,1 @@
-Server=localhost\SQLEXPRESS02;Database=master;Trusted_Connection=True;
-aaa
+"Server=(local)\\InsertGT;Database=aiutu;User Id=sa;Password=as;"

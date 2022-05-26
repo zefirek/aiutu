@@ -10,8 +10,5 @@ namespace aiutu.Application.Interfaces
         ListKontrahentForListVm GetAllKontrahenciForList();
         int AddKontrahent(NewKontrahentVm kontrahent);
         KontrahentDetailsVm GetKontrahentDetails(int kontrahentId);
-
-
-
     }
 }
