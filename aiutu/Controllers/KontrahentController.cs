@@ -1,4 +1,5 @@
-﻿using aiutu.Application.Services;
+﻿using aiutu.Application.Interfaces;
+using aiutu.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,11 @@ namespace aiutu.Web.Controllers
 {
     public class KontrahentController : Controller
     {
+        private readonly IKontrahentService _kontService;
+        public KontrahentController(IKontrahentService kontService)
+        {
+            _kontService = kontService;
+        }
         public IActionResult Index()
         {
             // utworzyć widok dla tej akcji
@@ -20,7 +26,7 @@ namespace aiutu.Web.Controllers
             // serwis musi przygotować dane
             // serwis musi zwrócić dane w odpowiednim formacie
 
-            var model = kontrahentService.GetAllKontrahenciForList();
+            var model = _kontService.GetAllKontrahenciForList();
             return View(model);
         }
 
@@ -30,29 +36,29 @@ namespace aiutu.Web.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult AddKontrahent(KontrahentModel model)
-        {
-            var id = kontrahentService.AddKontrahent(model);
-            return View();
-        }
+        //[HttpPost]
+        //public IActionResult AddKontrahent(KontrahentModel model)
+        //{
+        //    var id = _kontService.AddKontrahent(model);
+        //    return View();
+        //}
 
         [HttpGet]
-        public IActionResult AddNewAdresForKontrahent()
+        public IActionResult AddNewAdresForKontrahent(int kontrahentId)
         {
             return View();
         }
 
-        [HttpPost]
-        public IActionResult AddNewAdresForKontrahent(AdresModel model)
-        {
-            return View();
-        }
+        //[HttpPost]
+        //public IActionResult AddNewAdresForKontrahent(AdresModel model)
+        //{
+        //    return View();
+        //}
 
         public IActionResult ViewKontrahent(int kontrahentId)
         {
-            var kontrahentModel = kontrahentService.GetKontrahentDetails(kontrahentId);
-            return View(); //View(kontrahentModel);
+            var kontrahentModel = _kontService.GetKontrahentDetails(kontrahentId);
+            return View(kontrahentModel);
         }
 
     }

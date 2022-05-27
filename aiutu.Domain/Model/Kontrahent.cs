@@ -13,7 +13,7 @@ namespace aiutu.Domain.Model
         public string Regon { get; set; }
         public string CEOName { get; set; }
         public string CEOLastName { get; set; }
-        public bool CzyAktywny { get; set; }
+        public bool IsActive { get; set; }
         public KontrahentDanaKontaktowa KontrahentDaneKontaktowe { get; set; }
         public virtual ICollection<DanaKontaktowa> DaneKontaktowe { get; set; }
         public virtual ICollection<Adres> Adresy { get; set; }

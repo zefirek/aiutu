@@ -14,6 +14,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using aiutu.Domain.Interfaces;
+using aiutu.Infrastructure.Repositories;
+using aiutu.Application;
 
 namespace aiutu
 {
@@ -35,7 +37,21 @@ namespace aiutu
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<Context>();
 
-            services.AddTransient<IKontrahentRepository, KontrahentRepository>();
+            // asp 8.7 14:30
+            // ADDTRANSIENT - za ka¿dym razem, przy ka¿dym u¿yciu podawany jest nowa instancja obiektu
+            //services.AddTransient<IKontrahentRepository, KontrahentRepository>();
+            // ADDSCOPED - obiekt tworzony jest jeden raz na ¿¹danie 
+            //services.AddScoped<IKontrahentRepository, KontrahentRepository>(); 
+            // ADDSINGLETON - raz wywo³ane posiada ca³y czas t¹ sam¹ formê - nigdy siê nie zmieni w czasie uruchomienia
+            // nie u¿ywaæ
+            //services.AddSingleton<IKontrahentRepository, KontrahentRepository>();
+
+            //services.AddTransient<IPojazdRepository, PojazdRepository>();
+
+            // asp 8.7 18:00
+            services.AddApplication();
+            services.AddInfrastructure();
+
             services.AddControllersWithViews();
             services.AddRazorPages();
 
