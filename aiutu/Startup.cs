@@ -16,6 +16,9 @@ using System.Threading.Tasks;
 using aiutu.Domain.Interfaces;
 using aiutu.Infrastructure.Repositories;
 using aiutu.Application;
+using FluentValidation.AspNetCore;
+using FluentValidation;
+using aiutu.Application.ViewModels.Kontrahent;
 
 namespace aiutu
 {
@@ -52,8 +55,17 @@ namespace aiutu
             services.AddApplication();
             services.AddInfrastructure();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddFluentValidation(fv => {
+                    fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
+                }); 
+            // asp 8.12 11:00
+            //services.AddControllersWithViews().AddFluentValidation(fv => fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false);
             services.AddRazorPages();
+
+            //services.AddTransient<IValidator<NewKontrahentVm>, NewKontrahentValidation>();
+
+
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 

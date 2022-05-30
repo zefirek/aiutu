@@ -1,5 +1,6 @@
 ﻿using aiutu.Application.Interfaces;
 using aiutu.Application.Services;
+using aiutu.Application.ViewModels.Kontrahent;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace aiutu.Web.Controllers
         {
             _kontService = kontService;
         }
+        [HttpGet]
         public IActionResult Index()
         {
             // utworzyć widok dla tej akcji
@@ -26,22 +28,36 @@ namespace aiutu.Web.Controllers
             // serwis musi przygotować dane
             // serwis musi zwrócić dane w odpowiednim formacie
 
-            var model = _kontService.GetAllKontrahenciForList();
+            var model = _kontService.GetAllKontrahenciForList(2, 1, "");
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult Index(int pageSize, int? pageNo, string searchString)
+        {
+            if (!pageNo.HasValue)
+            {
+                pageNo = 1;
+            }
+            if (searchString is null)
+            {
+                searchString = String.Empty;
+            }
+            var model = _kontService.GetAllKontrahenciForList(pageSize, pageNo.Value, searchString);
             return View(model);
         }
 
         [HttpGet]
         public IActionResult AddKontrahent()
         {
-            return View();
+            return View(new NewKontrahentVm());
         }
 
-        //[HttpPost]
-        //public IActionResult AddKontrahent(KontrahentModel model)
-        //{
-        //    var id = _kontService.AddKontrahent(model);
-        //    return View();
-        //}
+        [HttpPost]
+        public IActionResult AddKontrahent(NewKontrahentVm model)
+        {
+            var id = _kontService.AddKontrahent(model);
+            return RedirectToAction("Index");
+        }
 
         [HttpGet]
         public IActionResult AddNewAdresForKontrahent(int kontrahentId)

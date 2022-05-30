@@ -16,6 +16,13 @@ namespace aiutu.Infrastructure.Repositories
             _context = context;
         }
 
+        public int AddKontrahent(Kontrahent kontrahent)
+        {
+            _context.Kontrahenci.Add(kontrahent);
+            _context.SaveChanges();
+            return kontrahent.Id;
+        }
+
         //asp 8.7 05:57
         public IQueryable<Kontrahent> GetAllActiveKontrahenci()
         {

@@ -7,7 +7,7 @@ namespace aiutu.Application.Interfaces
 {
     public interface IKontrahentService
     {
-        ListKontrahentForListVm GetAllKontrahenciForList();
+        ListKontrahentForListVm GetAllKontrahenciForList(int pageSize, int pageNo, string searchString);
         int AddKontrahent(NewKontrahentVm kontrahent);
         KontrahentDetailsVm GetKontrahentDetails(int kontrahentId);
     }

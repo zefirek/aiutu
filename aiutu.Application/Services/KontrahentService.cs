@@ -1,6 +1,7 @@
 ﻿using aiutu.Application.Interfaces;
 using aiutu.Application.ViewModels.Kontrahent;
 using aiutu.Domain.Interfaces;
+using aiutu.Domain.Model;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using System;
@@ -23,10 +24,12 @@ namespace aiutu.Application.Services
 
         public int AddKontrahent(NewKontrahentVm kontrahent)
         {
-            throw new NotImplementedException();
+            var kont = _mapper.Map<Kontrahent>(kontrahent);
+            var id = _kontrahentRepo.AddKontrahent(kont);
+            return id;
         }
 
-        public ListKontrahentForListVm GetAllKontrahenciForList()
+        public ListKontrahentForListVm GetAllKontrahenciForList(int pageSize, int pageNo, string searchString)
         {
             //var kontrahenci = _kontrahentRepo.GetAllActiveKontrahenci();
             //ListKontrahentForListVm result = new ListKontrahentForListVm();
@@ -44,12 +47,19 @@ namespace aiutu.Application.Services
             //result.Count = result.Kontrahenci.Count;
             //return result;
 
-            // asp 8.6 18:40
-            var kontrahenci = _kontrahentRepo.GetAllActiveKontrahenci()
+            //// asp 8.6 18:40
+            //var kontrahenci = _kontrahentRepo.GetAllActiveKontrahenci()
+            //    .ProjectTo<KontrahentForListVm>(_mapper.ConfigurationProvider).ToList();
+            // asp 8.9 5:30
+            var kontrahenci = _kontrahentRepo.GetAllActiveKontrahenci().Where(p => p.Nazwa.StartsWith(searchString))
                 .ProjectTo<KontrahentForListVm>(_mapper.ConfigurationProvider).ToList();
+            var kontrahenciToShow = kontrahenci.Skip(pageSize * (pageNo - 1)).Take(pageSize).ToList();  // wybieara dane dla aktualnej strony 
             var kontrahentList = new ListKontrahentForListVm()
             {
-                Kontrahenci = kontrahenci,
+                PageSize = pageSize,
+                CurrentPage = pageNo,
+                SearchString = searchString,
+                Kontrahenci = kontrahenciToShow,
                 Count = kontrahenci.Count
             };
             return kontrahentList;
