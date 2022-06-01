@@ -95,6 +95,7 @@ namespace aiutu.Web.Controllers
         }
 
         //[HttpPost]
+        //[ValidateAntiForgeryToken]
         //public IActionResult AddNewAdresForKontrahent(AdresModel model)
         //{
         //    return View();

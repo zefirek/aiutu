@@ -57,14 +57,17 @@ namespace aiutu
             services.AddApplication();
             services.AddInfrastructure();
 
-
+            services.AddControllersWithViews().AddFluentValidation();
             // asp 8.12 11:00
             //services.AddControllersWithViews().AddFluentValidation(fv => fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false);
-            services.AddRazorPages();
 
+            // validacja dodawania kontrahentów
             services.AddTransient<IValidator<NewKontrahentVm>, NewKontrahentValidation>();
 
-            services.AddDatabaseDeveloperPageExceptionFilter();
+
+            services.AddRazorPages();
+
+            //services.AddDatabaseDeveloperPageExceptionFilter();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

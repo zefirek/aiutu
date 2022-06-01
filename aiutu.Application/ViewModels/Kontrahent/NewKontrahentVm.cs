@@ -13,10 +13,10 @@ namespace aiutu.Application.ViewModels.Kontrahent
     {
         public int Id { get; set; }
         // asp 8.13 0:40
-        [Required]
+//        [Required]
         public string Nazwa { get; set; }
         public string NIP { get; set; }
-        [StringLength(14, MinimumLength = 9)]
+//        [StringLength(14, MinimumLength = 9)]
         public string Regon { get; set; }
 
         public void Mapping(Profile profile)
