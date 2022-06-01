@@ -20,6 +20,7 @@ namespace aiutu.Controllers
 
         public IActionResult Index()
         {
+            _logger.LogInformation("Jestem w Home/Index");
             return View();
         }
 

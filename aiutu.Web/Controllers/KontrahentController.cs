@@ -46,6 +46,7 @@ namespace aiutu.Web.Controllers
             return View(model);
         }
 
+        #region *** Dodawanie nowego ***
         [HttpGet]
         public IActionResult AddKontrahent()
         {
@@ -53,11 +54,39 @@ namespace aiutu.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AddKontrahent(NewKontrahentVm model)
         {
             var id = _kontService.AddKontrahent(model);
             return RedirectToAction("Index");
         }
+        #endregion
+
+        #region *** Edycja ***
+
+        [HttpGet]
+        public IActionResult EditKontrahent(int id)
+        {
+            var kontrahent = _kontService.GetKontrahentForEdit(id);
+            return View(kontrahent);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditKontrahent(NewKontrahentVm model)
+        {
+            _kontService.UpdateKontrahent(model);
+            return RedirectToAction("Index");
+        }
+
+        #endregion
+
+        public IActionResult Delete(int id)
+        {
+            _kontService.DeleteKontrahent(id);
+            return RedirectToAction("Index");
+        }
+
 
         [HttpGet]
         public IActionResult AddNewAdresForKontrahent(int kontrahentId)

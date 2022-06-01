@@ -115,5 +115,23 @@ namespace aiutu.Application.Services
             }
             return kontrahentVm;
         }
+
+        public NewKontrahentVm GetKontrahentForEdit(int id)
+        {
+            var kontrahent = _kontrahentRepo.GetKontrahent(id);
+            var kontrahentVm = _mapper.Map <NewKontrahentVm>(kontrahent);
+            return kontrahentVm;
+        }
+
+        public void UpdateKontrahent(NewKontrahentVm model)
+        {
+            var kontrahent = _mapper.Map<Kontrahent>(model);
+            _kontrahentRepo.UpdateKontrahent(kontrahent);
+        }
+
+        public void DeleteKontrahent(int id)
+        {
+            _kontrahentRepo.DeleteKontrahent(id);
+        }
     }
 }

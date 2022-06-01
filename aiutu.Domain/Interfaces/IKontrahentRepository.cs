@@ -11,5 +11,7 @@ namespace aiutu.Domain.Interfaces
         IQueryable<Kontrahent> GetAllActiveKontrahenci();
         Kontrahent GetKontrahent(int kontrahentId);
         int AddKontrahent(Kontrahent kontrahent);
+        void UpdateKontrahent(Kontrahent kontrahent);
+        void DeleteKontrahent(int id);
     }
 }

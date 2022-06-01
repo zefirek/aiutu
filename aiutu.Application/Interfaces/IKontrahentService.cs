@@ -10,5 +10,8 @@ namespace aiutu.Application.Interfaces
         ListKontrahentForListVm GetAllKontrahenciForList(int pageSize, int pageNo, string searchString);
         int AddKontrahent(NewKontrahentVm kontrahent);
         KontrahentDetailsVm GetKontrahentDetails(int kontrahentId);
+        NewKontrahentVm GetKontrahentForEdit(int id);
+        void UpdateKontrahent(NewKontrahentVm model);
+        void DeleteKontrahent(int id);
     }
 }

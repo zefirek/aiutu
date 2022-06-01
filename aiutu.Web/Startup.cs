@@ -19,6 +19,7 @@ using aiutu.Application;
 using FluentValidation.AspNetCore;
 using FluentValidation;
 using aiutu.Application.ViewModels.Kontrahent;
+using Microsoft.Extensions.Logging;
 
 namespace aiutu
 {
@@ -48,32 +49,31 @@ namespace aiutu
             // ADDSINGLETON - raz wywo³ane posiada ca³y czas t¹ sam¹ formê - nigdy siê nie zmieni w czasie uruchomienia
             // nie u¿ywaæ
             //services.AddSingleton<IKontrahentRepository, KontrahentRepository>();
-
+            // asp 8.7 15:30 
+            //services.AddTransient<IKontrahentRepository, KontrahentRepository>();
             //services.AddTransient<IPojazdRepository, PojazdRepository>();
 
             // asp 8.7 18:00
             services.AddApplication();
             services.AddInfrastructure();
 
-            services.AddControllersWithViews()
-                .AddFluentValidation(fv => {
-                    fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
-                }); 
+
             // asp 8.12 11:00
             //services.AddControllersWithViews().AddFluentValidation(fv => fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false);
             services.AddRazorPages();
 
-            //services.AddTransient<IValidator<NewKontrahentVm>, NewKontrahentValidation>();
-
-
+            services.AddTransient<IValidator<NewKontrahentVm>, NewKontrahentValidation>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            // asp 8.16 6:00
+            // œcie¿ka do pliku z logami
+            //loggerFactory.AddFile("Logs/myLog-{Date}.txt");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

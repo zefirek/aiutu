@@ -33,5 +33,27 @@ namespace aiutu.Infrastructure.Repositories
         {
             return _context.Kontrahenci.FirstOrDefault(p => p.Id == kontrahentId);
         }
+
+        public void UpdateKontrahent(Kontrahent kontrahent)
+        {
+            // asp 8.14 8:35
+            _context.Attach(kontrahent);
+            _context.Entry(kontrahent).Property("Nazwa").IsModified = true;
+            _context.Entry(kontrahent).Property("NIP").IsModified = true;
+            _context.Entry(kontrahent).Property("Regon").IsModified = true;
+            _context.SaveChanges();
+        }
+
+        public void DeleteKontrahent(int id)
+        {
+            // asp 8.15 3:00
+            var kontrahent = _context.Kontrahenci.Find(id);
+            if (kontrahent!=null)
+            {
+                _context.Kontrahenci.Remove(kontrahent);
+                _context.SaveChanges();
+            }
+        }
+
     }
 }
